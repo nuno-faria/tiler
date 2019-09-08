@@ -82,7 +82,7 @@ All configurations can be changed in the `conf.py` file.
 <img src="images/heart_hearts.png" width="40%">
 
 
-### Legos
+### Lego blocks
 
 <img src="images/cake_lego.png" width="40%">
 <img src="images/starry_night_lego.png" width="100%">
