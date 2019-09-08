@@ -145,7 +145,7 @@ def most_similar_tile(box_mode_freq, tiles):
 
 # builds the boxes and finds the best tile for each one
 def get_processed_image_boxes(image_path, tiles):
-    print('Gettting and processing boxes')
+    print('Getting and processing boxes')
     img = read_image(image_path)
     pool = Pool(POOL_SIZE)
     all_boxes = []
