@@ -12,14 +12,16 @@ An image can be built out of circles, lines, waves, cross stitches, legos, minec
 
 ## Installation
 
-- Install Python 3
+- Clone the repo: `git clone https://github.com/nuno-faria/tiler.git`;
+- Install Python 3;
+- Install pip (optional, to install the dependencies);
 - Install dependencies: `pip install -r requirements.txt`
 
 ## Usage
 
 - Make a folder with the tiles to build the image;
     - The script gen_tiles.py can help in this task; it builds tiles with multiple colors based on the source tile (note: its recommended for the source file to have an RGB color of (240,240,240));
-- Run `python tiler.py path/to/image path/to/tiles_folder`.
+- Run `python tiler.py path/to/image path/to/tiles_folder/` (**note the trailing slash on the tiles folder**).
 
 ## Configuration
 
