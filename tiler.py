@@ -80,7 +80,7 @@ def load_tiles(paths):
     for path in paths:
         if os.path.isdir(path):
             for tile_name in tqdm(os.listdir(path)):
-                tile = read_image(path + tile_name)
+                tile = read_image(os.path.join(path, tile_name))
                 mode, rel_freq = mode_color(tile)
                 if mode != None:
                     for scale in RESIZING_SCALES:
