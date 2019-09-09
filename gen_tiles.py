@@ -18,6 +18,7 @@ DEPTH = conf.DEPTH
 ROTATIONS = conf.ROTATIONS
 THREADS = multiprocessing.cpu_count()
 
+
 def get_tile_dir(img_dir: Path, img_name: str) -> Path:
     tile_dir = img_dir / Path(f"gen_{img_name}")
 
@@ -49,7 +50,7 @@ def make_rotation(
     center: Tuple[float, float],
     rotation: float,
     colors: Tuple[int, int, int],
-    bar: tqdm
+    bar: tqdm,
 ):
     r, g, b = colors
     rotation_matrix = cv2.getRotationMatrix2D(center, rotation, 1)
@@ -68,7 +69,15 @@ def make_rotation(
     bar.update()
 
 
-def generate_tiles(img: np.array, img_name: str, ext: str, tile_dir: Path, depth: int, rotations: List[int], pool: ThreadPoolExecutor):
+def generate_tiles(
+    img: np.array,
+    img_name: str,
+    ext: str,
+    tile_dir: Path,
+    depth: int,
+    rotations: List[int],
+    pool: ThreadPoolExecutor,
+):
     height, width, center = get_dimensions(img)
     b_range = np.arange(0, 1.01, 1 / depth)
     progress_bar = tqdm(total=len(b_range) ** 3)
@@ -80,13 +89,40 @@ def generate_tiles(img: np.array, img_name: str, ext: str, tile_dir: Path, depth
                 new_img = img * [b, g, r, 1]
                 new_img = new_img.astype("uint8")
                 for rotation in rotations:
-                    pool.submit(make_rotation, img_name, ext, tile_dir, new_img, height, width, center, rotation, colors, progress_bar)
+                    pool.submit(
+                        make_rotation,
+                        img_name,
+                        ext,
+                        tile_dir,
+                        new_img,
+                        height,
+                        width,
+                        center,
+                        rotation,
+                        colors,
+                        progress_bar,
+                    )
 
 
 @click.command()
-@click.option('-d','--depth', default=DEPTH, help="Color depth.", show_default=True, type=click.INT)
-@click.option('-r','--rotations', default=ROTATIONS, help="Rotations.", multiple=True, show_default=True, type=click.INT)
-@click.argument('img', type=click.Path(exists=True))
+@click.option(
+    "-d",
+    "--depth",
+    default=DEPTH,
+    help="Color depth.",
+    show_default=True,
+    type=click.INT,
+)
+@click.option(
+    "-r",
+    "--rotations",
+    default=ROTATIONS,
+    help="Rotations.",
+    multiple=True,
+    show_default=True,
+    type=click.INT,
+)
+@click.argument("img", type=click.Path(exists=True))
 def cmd(img: str, depth: int, rotations: List[int]):
     img_path = Path(img)
     img_dir = img_path.parent
