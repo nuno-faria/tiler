@@ -45,14 +45,14 @@ def make_rotation(
     ext: str,
     tile_dir: Path,
     new_img: np.array,
-    height: int,
-    width: int,
-    center: Tuple[float, float],
+    dimensions: Tuple[int, int, Tuple[float, float]],
     rotation: float,
     colors: Tuple[int, int, int],
     bar: tqdm,
 ):
+    height, width, center = dimensions
     r, g, b = colors
+    
     rotation_matrix = cv2.getRotationMatrix2D(center, rotation, 1)
     abs_cos = abs(rotation_matrix[0, 0])
     abs_sin = abs(rotation_matrix[0, 1])
@@ -78,7 +78,7 @@ def generate_tiles(
     rotations: List[int],
     pool: ThreadPoolExecutor,
 ):
-    height, width, center = get_dimensions(img)
+    dimensions = get_dimensions(img)
     b_range = np.arange(0, 1.01, 1 / depth)
     operations = len(b_range) ** 3 * len(rotations)
     progress_bar = tqdm(total=operations)
