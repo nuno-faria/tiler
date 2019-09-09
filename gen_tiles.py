@@ -80,7 +80,8 @@ def generate_tiles(
 ):
     height, width, center = get_dimensions(img)
     b_range = np.arange(0, 1.01, 1 / depth)
-    progress_bar = tqdm(total=len(b_range) ** 3)
+    operations = len(b_range) ** 3 * len(rotations)
+    progress_bar = tqdm(total=operations)
 
     for b in b_range:
         for g in np.arange(0, 1.01, 1 / depth):
