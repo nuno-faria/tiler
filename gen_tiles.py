@@ -1,3 +1,7 @@
+from concurrent.futures import ThreadPoolExecutor
+from itertools import product
+from pathlib import Path
+from typing import Tuple, List
 import cv2
 import numpy as np
 import os
@@ -5,10 +9,8 @@ import sys
 from tqdm import tqdm
 import math
 import conf
-from pathlib import Path
-from typing import Tuple, List
 import multiprocessing
-from concurrent.futures import ThreadPoolExecutor
+
 import click
 
 
@@ -52,7 +54,7 @@ def make_rotation(
 ):
     height, width, center = dimensions
     b, g, r = colors
-    
+
     rotation_matrix = cv2.getRotationMatrix2D(center, rotation, 1)
     abs_cos = abs(rotation_matrix[0, 0])
     abs_sin = abs(rotation_matrix[0, 1])
