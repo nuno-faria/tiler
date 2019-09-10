@@ -54,6 +54,8 @@ All configurations can be changed in the `conf.py` file.
 
 <img src="images/cake_circles.png" width="40%">
 
+[Original](https://www.flaticon.com/free-icon/cake_1102780) cake image by [pongsakornred](https://www.flaticon.com/authors/pongsakornred) from [FLATICON](https://www.flaticon.com).
+
 #### Fixed
 
 - 10x10
