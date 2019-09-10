@@ -42,12 +42,12 @@ def resize_image(img, ratio):
 
 
 # the most frequent color in an image and its relative frequency
-def mode_color(img):
+def mode_color(img, ingore_alpha=False):
     counter = defaultdict(int)
     total = 0
     for y in img:
         for x in y:
-            if len(x) < 4 or x[3] != 0:
+            if len(x) < 4 or ingore_alpha or x[3] != 0:
                 counter[tuple(x[:3])] += 1
             else:
                 counter[(-1,-1,-1)] += 1
@@ -81,7 +81,7 @@ def load_tiles(paths):
         if os.path.isdir(path):
             for tile_name in tqdm(os.listdir(path)):
                 tile = read_image(os.path.join(path, tile_name))
-                mode, rel_freq = mode_color(tile)
+                mode, rel_freq = mode_color(tile, ingore_alpha=True)
                 if mode != None:
                     for scale in RESIZING_SCALES:
                         t = resize_image(tile, scale)
