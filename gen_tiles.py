@@ -22,13 +22,16 @@ if not os.path.exists(out_folder):
 img = cv2.imread(img_path, cv2.IMREAD_UNCHANGED)
 img = img.astype('float')
 
-height, width = img.shape[:2]
+height, width, channels = img.shape
 center = (width/2, height/2)
 
 for b in tqdm(np.arange(0, 1.01, 1 / DEPTH)):
     for g in np.arange(0, 1.01, 1 / DEPTH):
         for r in np.arange(0, 1.01, 1 / DEPTH):
-            new_img = img * [b, g, r, 1]
+            mult_vector = [b, g, r]
+            if channels == 4:
+                mult_vector.append(1)
+            new_img = img * mult_vector
             new_img = new_img.astype('uint8')
             for rotation in ROTATIONS:
                 rotation_matrix = cv2.getRotationMatrix2D(center, rotation, 1)

@@ -19,8 +19,8 @@ An image can be built out of circles, lines, waves, cross stitches, legos, minec
 
 ## Usage
 
-- Make a folder with the tiles to build the image;
-    - The script gen_tiles.py can help in this task; it builds tiles with multiple colors based on the source tile (note: its recommended for the source file to have an RGB color of (240,240,240));
+- Make a folder with the tiles (and only the tiles) to build the image;
+    - The script `gen_tiles.py` can help in this task; it builds tiles with multiple colors based on the source tile (note: its recommended for the source file to have an RGB color of (240,240,240)). It is used as `python gen_tiles.py path/to/image` and creates a folder with a 'gen_' prefix in the same path as the base image.
 - Run `python tiler.py path/to/image path/to/tiles_folder/`.
 
 ## Configuration
