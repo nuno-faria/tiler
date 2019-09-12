@@ -31,6 +31,8 @@ def color_quantization(img, n_colors):
 # returns an image given its path
 def read_image(path):
     img = cv2.imread(path, cv2.IMREAD_UNCHANGED)
+    if img.shape[2] == 3:
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2BGRA)
     img = color_quantization(img.astype('float'), COLOR_DEPTH)
     return img.astype('uint8')
 
@@ -170,8 +172,8 @@ def get_processed_image_boxes(image_path, tiles):
 def place_tile(img, box):
     p1 = np.flip(box['pos'])
     p2 = p1 + box['img'].shape[:2]
-    mask = box['tile'][:, :, 3] != 0
     img_box = img[p1[0]:p2[0], p1[1]:p2[1]]
+    mask = box['tile'][:, :, 3] != 0
     mask = mask[:img_box.shape[0], :img_box.shape[1]]
     if OVERLAP_TILES or not np.any(img_box[mask]):
         img_box[mask] = box['tile'][:img_box.shape[0], :img_box.shape[1], :][mask]
