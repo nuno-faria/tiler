@@ -14,7 +14,7 @@ ROTATIONS = conf.ROTATIONS
 img_path = sys.argv[1]
 img_dir = os.path.dirname(img_path)
 img_name, ext = os.path.basename(img_path).rsplit('.', 1)
-out_folder = img_dir + '/gen_' + img_name
+out_folder = os.path.join(img_dir, 'gen_' + img_name)
 
 if not os.path.exists(out_folder):
     os.mkdir(out_folder)
