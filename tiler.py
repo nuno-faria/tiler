@@ -84,7 +84,7 @@ def load_tiles(paths):
             for tile_name in tqdm(os.listdir(path)):
                 tile = read_image(os.path.join(path, tile_name))
                 mode, rel_freq = mode_color(tile, ingore_alpha=True)
-                if mode != None:
+                if mode is not None:
                     for scale in RESIZING_SCALES:
                         t = resize_image(tile, scale)
                         res = tuple(t.shape[:2])
@@ -96,7 +96,7 @@ def load_tiles(paths):
 
             with open('tiles.pickle', 'wb') as f:
                 pickle.dump(tiles, f)
-        
+
         # load pickle with tiles (one file only)
         else:
             with open(path, 'rb') as f:
@@ -139,7 +139,7 @@ def most_similar_tile(box_mode_freq, tiles):
         min_tile_img = None
         for t in tiles:
             dist = (1 + color_distance(box_mode_freq[0], t['mode'])) / box_mode_freq[1]
-            if min_distance == None or dist < min_distance:
+            if min_distance is None or dist < min_distance:
                 min_distance = dist
                 min_tile_img = t['tile']
         return (min_distance, min_tile_img)
@@ -156,7 +156,7 @@ def get_processed_image_boxes(image_path, tiles):
         boxes = image_boxes(img, res)
         modes = pool.map(mode_color, [x['img'] for x in boxes])
         most_similar_tiles = pool.starmap(most_similar_tile, zip(modes, [ts for x in range(len(modes))]))
-        
+
         i = 0
         for min_dist, tile in most_similar_tiles:
             boxes[i]['min_dist'] = min_dist
@@ -165,7 +165,7 @@ def get_processed_image_boxes(image_path, tiles):
 
         all_boxes += boxes
 
-    return all_boxes, img.shape 
+    return all_boxes, img.shape
 
 
 # places a tile in the image
@@ -183,7 +183,7 @@ def place_tile(img, box):
 def create_tiled_image(boxes, res, render=False):
     print('Creating tiled image')
     img = np.zeros(shape=(res[0], res[1], 4), dtype=np.uint8)
-    
+
     for box in tqdm(sorted(boxes, key=lambda x: x['min_dist'], reverse=OVERLAP_TILES)):
         place_tile(img, box)
         if render:
@@ -199,7 +199,7 @@ def main():
         image_path = sys.argv[1]
     else:
         image_path = conf.IMAGE_TO_TILE
-    
+
     if len(sys.argv) > 2:
         tiles_paths = sys.argv[2:]
     else:
