@@ -1,6 +1,6 @@
 # GEN TILES CONFS
 
-# number of divisions per color (R, G and B)
+# number of divisions per channel (R, G and B)
 # DEPTH = 4 -> 4 * 4 * 4 = 64 colors
 DEPTH = 4
 # list of rotations, in degrees, to apply over the original image
@@ -12,7 +12,8 @@ ROTATIONS = [0]
 
 # TILER CONFS
 
-# number of colors per image
+# number of divisions per channel
+# (COLOR_DEPTH = 32 -> 32 * 32 * 32 = 32768 colors)
 COLOR_DEPTH = 32
 # tiles scales (1 = default resolution)
 RESIZING_SCALES = [0.5, 0.4, 0.3, 0.2, 0.1]
