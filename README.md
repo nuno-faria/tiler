@@ -35,6 +35,7 @@ All configurations can be changed in the `conf.py` file.
 #### `tiler.py`
 
 - `COLOR_DEPTH` - number of divisions in each color channel (ex: COLOR_DEPTH = 4 -> 4 * 4 * 4 = 64 colors);
+- `IMAGE_SCALE` - scale to apply to the image to tile (1 = default scale);
 - `RESIZING_SCALES` - scale to apply to each tile (ex: [1, 0.75, 0.5, 0.25]);
 - `PIXEL_SHIFT` - number of pixels shifted to create each box (ex: (5,5)); if None, shift will be the same as the tile dimension);
     <img src="images/pixel_shift.png" width="100%">
