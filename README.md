@@ -7,7 +7,7 @@
 
 Tiler is a tool to create an image using all kinds of other smaller images (tiles). It is different from other mosaic tools since it can adapt to tiles with multiple shapes and sizes (i.e. not limited to squares).
 
-An image can be built out of circles, lines, waves, cross stitches, legos, minecraft blocks, paper clips, letters, ... The possibilities are endless!
+An image can be built out of circles, lines, waves, cross stitches, lego bricks, minecraft blocks, paper clips, letters, ... The possibilities are endless!
 
 
 ## Installation
@@ -85,7 +85,7 @@ All configurations can be changed in the `conf.py` file.
 <img src="images/heart_hearts.png" width="40%">
 
 
-### Legos
+### Lego bricks
 
 <img src="images/cake_lego.png" width="40%">
 <img src="images/starry_night_lego.png" width="100%">
