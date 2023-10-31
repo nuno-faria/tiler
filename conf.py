@@ -15,6 +15,8 @@ ROTATIONS = [0]
 # number of divisions per channel
 # (COLOR_DEPTH = 32 -> 32 * 32 * 32 = 32768 colors)
 COLOR_DEPTH = 32
+# Scale of the image to be tiled (1 = default resolution)
+IMAGE_SCALE = 1
 # tiles scales (1 = default resolution)
 RESIZING_SCALES = [0.5, 0.4, 0.3, 0.2, 0.1]
 # number of pixels shifted to create each box (tuple with (x,y))

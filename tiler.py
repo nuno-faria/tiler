@@ -13,6 +13,8 @@ from time import sleep
 
 # number of colors per image
 COLOR_DEPTH = conf.COLOR_DEPTH
+# image scale
+IMAGE_SCALE = conf.IMAGE_SCALE
 # tiles scales
 RESIZING_SCALES = conf.RESIZING_SCALES
 # number of pixels shifted to create each box (x,y)
@@ -29,11 +31,14 @@ def color_quantization(img, n_colors):
 
 
 # returns an image given its path
-def read_image(path):
+def read_image(path, mainImage=False):
     img = cv2.imread(path, cv2.IMREAD_UNCHANGED)
     if img.shape[2] == 3:
         img = cv2.cvtColor(img, cv2.COLOR_BGR2BGRA)
     img = color_quantization(img.astype('float'), COLOR_DEPTH)
+    # scale the image according to IMAGE_SCALE, if this is the main image
+    if mainImage:
+        img = cv2.resize(img, (0, 0), fx=IMAGE_SCALE, fy=IMAGE_SCALE)
     return img.astype('uint8')
 
 
@@ -148,7 +153,7 @@ def most_similar_tile(box_mode_freq, tiles):
 # builds the boxes and finds the best tile for each one
 def get_processed_image_boxes(image_path, tiles):
     print('Getting and processing boxes')
-    img = read_image(image_path)
+    img = read_image(image_path, mainImage=True)
     pool = Pool(POOL_SIZE)
     all_boxes = []
 
